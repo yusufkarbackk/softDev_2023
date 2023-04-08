@@ -1,6 +1,6 @@
 print("hello softdev")
 
-# ini komen 
+# ini komen
 pesan = "selamat pagi" #string
 print(pesan)
 print(f"isi pesan ini adalah: {pesan}")
