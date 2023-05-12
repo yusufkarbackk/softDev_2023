@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")  # rute yang di akses di url
 def index():  # fungsi yang dipanggil sesuai dengan url diatas
-    return render_template('index.html')
+    return render_template('home.html')
 
 
 @app.route("/about")
@@ -18,6 +18,9 @@ def about_page():
 def show_product(product_id):
     return f"product id: {product_id}"
 
+@app.route("/gambar")
+def show_gambar():
+    return render_template('gambar.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

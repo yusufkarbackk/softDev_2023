@@ -1,0 +1,6 @@
+.card-img-top {
+    max-height: 400px;
+    /* Set the maximum height */
+    object-fit: cover;
+    /* Maintain the aspect ratio and cover the container */
+}
