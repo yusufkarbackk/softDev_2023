@@ -1,5 +1,6 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request, redirect, url_for
+import os
+from database import getMySqlConnection
 app = Flask(__name__)
 
 
@@ -7,9 +8,33 @@ app = Flask(__name__)
 def index():  # fungsi yang dipanggil sesuai dengan url diatas
     return render_template('home.html')
 
-@app.route("/tambah_menu")  # rute yang di akses di url
+
+# rute yang di akses di url
+@app.route("/tambah_menu", methods=['POST', 'GET'])
 def tambah_menu():  # fungsi yang dipanggil sesuai dengan url diatas
+    db = getMySqlConnection()  # fungsi yang dipanggil sesuai dengan url diatas
+    if request.method == "POST":
+        data = request.form.to_dict()
+        file = request.files['gambar_menu']
+        data['gambar_menu'] = file.filename
+        print(data)
+        try:
+            cur = db.cursor()
+            sqlstr = f"INSERT INTO menu (nama_menu, deskripsi, alamat_gambar) VALUES('{data['nama_menu']}', '{data['deskripsi']}', '{data['gambar_menu']}')"
+            cur.execute(sqlstr)
+            db.commit()
+            cur.close()
+            file.save(os.path.join('static/images', file.filename))
+
+            print('sukses')
+            # output_json = cur.fetchall()
+        except Exception as e:
+            print("Error in SQL:\n", e)
+        finally:
+            db.close()
+        return redirect(url_for('index'))
     return render_template('add_menu.html')
+
 
 @app.route("/about")
 def about_page():
@@ -22,4 +47,4 @@ def show_product(product_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    app.run(debug=True)

@@ -11,22 +11,24 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Nama Menu</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-        </div>
-        <div class="mb-3">
-            <label for="formFile" class="form-label">Default file input example</label>
-            <input class="form-control" type="file" id="formFile">
-          </div>
-        <button type="button" class="btn btn-primary">tambah gambar</button>
+    <form action="{{url_for('tambah_menu')}}" enctype="multipart/form-data" method="post">
+        <div class="container">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Nama Menu</label>
+                <input type="text" class="form-control" name="nama_menu" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
+                <input type="text" class="form-control" name="deskripsi" id="exampleFormControlInput1" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" name="gambar_menu" type="file" id="formFile">
+            </div>
+            <button type="submit" class="btn btn-primary">tambah gambar</button>
 
-    </div>
+        </div>
+    </form>
 </body>
 
 </html>
