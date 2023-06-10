@@ -3,13 +3,33 @@ import os
 from database import getMySqlConnection
 app = Flask(__name__)
 
+app.config['UPLOAD_FOLDER'] = 'static/images'
+
 
 @app.route("/")  # rute yang di akses di url
 def index():  # fungsi yang dipanggil sesuai dengan url diatas
-    return render_template('home.html')
+    db = getMySqlConnection()  # fungsi yang dipanggil sesuai dengan url diatas
+    sqlstr = f"SELECT * from menu"
+    cur = db.cursor()
+    cur.execute(sqlstr)
+    output_json = cur.fetchall()
+    print(output_json)
+    return render_template('home.html', menu=output_json)
 
+
+@app.route("/detail/<int:menu_id>")
+def detail(menu_id):
+    db = getMySqlConnection()  # fungsi yang dipanggil sesuai dengan url diatas
+    sqlstr = f"SELECT * from menu where id = {menu_id}"
+    cur = db.cursor()
+    cur.execute(sqlstr)
+    output_json = cur.fetchall()
+    print(output_json)
+    return render_template('detail_page.html', menu=output_json)
 
 # rute yang di akses di url
+
+
 @app.route("/tambah_menu", methods=['POST', 'GET'])
 def tambah_menu():  # fungsi yang dipanggil sesuai dengan url diatas
     db = getMySqlConnection()  # fungsi yang dipanggil sesuai dengan url diatas
