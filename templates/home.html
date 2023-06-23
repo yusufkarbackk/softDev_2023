@@ -60,13 +60,17 @@
                     <img src="{{ url_for('static', filename='images/'+item[3]) }}" class="card-img-top" alt="Image 1">
                     <div class="card-body">
                         <h5 class="card-title">{{item[1]}}</h5>
-                        <p class="card-text">Some text for Card 1.</p>
+                        <p class="card-text">{{item[2]}}.</p>
                         <div class="card-buttons">
-                            <button type="button" class="btn btn-primary">update gambar</button>
+                            <a href="{{url_for('update', menu_id=item[0])}}">
+                                <button type="button" class="btn btn-primary">update gambar</button>
+                            </a>
                             <a href="{{url_for('detail', menu_id=item[0])}}">
                                 <button type="button" class="btn btn-secondary">details</button>
                             </a>
-                            <button type="button" class="btn btn-danger">delete</button>
+                            <a href="{{url_for('delete', menu_id=item[0])}}">
+                                <button type="button" class="btn btn-danger">delete</button>
+                            </a>
                         </div>
                         <div class="card-buttons"></div>
                     </div>
